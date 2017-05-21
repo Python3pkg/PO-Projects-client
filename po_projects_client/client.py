@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import json, logging, os
-import tarfile, StringIO, tempfile, shutil
+import tarfile, io, tempfile, shutil
 
 from requests.exceptions import HTTPError
 
@@ -96,7 +96,7 @@ class POProjectClient(object):
         
         self.logger.debug("Opening the tarball")
         # Write the tarball in memory
-        fp = StringIO.StringIO()
+        fp = io.StringIO()
         for chunk in response.iter_content(1024):
             fp.write(chunk)
         fp.seek(0)
@@ -152,7 +152,7 @@ class POProjectClient(object):
         response = self.project_detail_url.patch(data=json.dumps({'pot': pot_file_content}), headers=self.client_headers)
         if response.status_code != 200:
             if self.debug_requests:
-                print response.json()
+                print(response.json())
             response.raise_for_status()
  
 

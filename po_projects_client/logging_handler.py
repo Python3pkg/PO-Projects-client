@@ -139,7 +139,7 @@ def init_logging(loglevel, printout=True, logfile=None):
     rootlogger.setLevel(getattr(logging, loglevel))
     
     if not printout and not logfile:
-        from StringIO import StringIO
+        from io import StringIO
         dummystream = StringIO()
         rootlogger.addHandler(logging.StreamHandler(dummystream))
     else:

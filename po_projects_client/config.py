@@ -1,4 +1,4 @@
-import os, ConfigParser
+import os, configparser
 
 class POProjectConfig(object):
     """
@@ -12,7 +12,7 @@ class POProjectConfig(object):
     def __init__(self):
         self._datas = None
         self._filepath = None
-        self.parser = ConfigParser.SafeConfigParser()
+        self.parser = configparser.SafeConfigParser()
         self.parser.optionxform = str
     
     def open(self, filepath):
@@ -32,7 +32,7 @@ class POProjectConfig(object):
         if self._datas is None:
             self._datas = {}
         self._datas.update(datas)
-        for k,v in datas.items():
+        for k,v in list(datas.items()):
             # Don't try to save None values
             if v is None:
                 continue
